@@ -235,11 +235,12 @@
     <section class="gallery">
         <h2>Desayunos Sorpresa</h2>
         <div class="gallery-grid">
-            <img src="https://i.imgur.com/VCWI27K.png" alt="Desayuno 1" onclick="openModal(this)">
-            <img src="https://i.imgur.com/XmSWPEu.png" alt="Desayuno 2" onclick="openModal(this)">
-            <img src="https://i.imgur.com/cExRvSs.png" alt="Desayuno 3" onclick="openModal(this)">
-            <img src="https://i.imgur.com/7RahH8S.png" alt="Desayuno 4" onclick="openModal(this)">
-            <img src="https://i.imgur.com/2STSOBG.png" alt="Desayuno 5" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno 1" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno 2" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno 3" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno 4" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno 5" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno 6" onclick="openModal(this)">
         </div>
     </section>
 
@@ -273,10 +274,12 @@
             modal.style.left = '0';
             modal.style.width = '100%';
             modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
             modal.style.display = 'flex';
             modal.style.justifyContent = 'center';
             modal.style.alignItems = 'center';
+            modal.style.cursor = 'pointer';
+            modal.style.zIndex = '1001';
             modal.onclick = () => modal.remove();
 
             const modalImg = document.createElement('img');
