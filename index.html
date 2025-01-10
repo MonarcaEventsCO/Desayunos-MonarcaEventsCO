@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desayunos Sorpresa - MonarcaEventsCO</title>
+    <style>
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f1f1f1;
+            overflow-x: hidden;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            transition: left 0.3s ease;
+        }
+
+        .menu-button div {
+            width: 35px;
+            height: 4px;
+            background-color: #FFD700;
+            margin: 5px 0;
+            transition: opacity 0.3s;
+        }
+
+        .menu-button.active div {
+            opacity: 0;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 250px;
+            height: 100%;
+            background-color: #1E1E1E;
+            color: #f1f1f1;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .menu-button.active {
+            left: 260px;
+        }
+
+        .menu a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: #1E1E1E;
+            color: white;
+            font-size: 1.2rem;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideInRight 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #FFD700;
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+        }
+
+        .gallery {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .gallery h2 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            border-color: #FFD700;
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .contact {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact h2 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .contact strong {
+            color: #FFD700;
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-icon:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <button class="menu-button" onclick="toggleMenu()" id="menuButton">
+        <div></div>
+        <div></div>
+        <div></div>
+    </button>
+
+    <div class="menu" id="menu">
+        <a href="#">Desayunos</a>
+        <a href="#">Horarios de Atención</a>
+        <a href="#">Información de Contacto</a>
+    </div>
+
+    <section class="hero">
+        <h2>
+            Bienvenido a <span class="highlight">MonarcaEventsCO</span> donde hacemos tus sueños realidad
+        </h2>
+        <p>Transformamos tus momentos en recuerdos inolvidables. Da click para ver y ampliar nuestros desayunos sorpresa.</p>
+    </section>
+
+    <section class="gallery">
+        <h2>Desayunos Sorpresa</h2>
+        <div class="gallery-grid">
+            <img src="https://i.imgur.com/VCWI27K.png" alt="Desayuno 1" onclick="openModal(this)">
+            <img src="https://i.imgur.com/XmSWPEu.png" alt="Desayuno 2" onclick="openModal(this)">
+            <img src="https://i.imgur.com/cExRvSs.png" alt="Desayuno 3" onclick="openModal(this)">
+            <img src="https://i.imgur.com/7RahH8S.png" alt="Desayuno 4" onclick="openModal(this)">
+            <img src="https://i.imgur.com/2STSOBG.png" alt="Desayuno 5" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2>Contacto</h2>
+        <p>
+            Si deseas más información o tienes alguna consulta, no dudes en contactarnos:<br>
+            <strong>Email:</strong> monarcaeventsco@gmail.com<br>
+            <strong>WhatsApp:</strong> +57 317 4968554
+            <a href="https://wa.me/+573174968554" target="_blank">
+                <img src="https://i.imgur.com/BQeNOAJ.jpeg" alt="WhatsApp" class="whatsapp-icon">
+            </a>
+        </p>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const button = document.getElementById('menuButton');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.toggle('active');
+            button.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function openModal(img) {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.onclick = () => modal.remove();
+
+            const modalImg = document.createElement('img');
+            modalImg.src = img.src;
+            modalImg.style.maxWidth = '90%';
+            modalImg.style.maxHeight = '90%';
+            modal.appendChild(modalImg);
+
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html>
