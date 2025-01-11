@@ -310,14 +310,6 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
-        /* Precio añadido */
-        .price {
-            font-size: 1.2rem;
-            color: #FFD700;
-            font-weight: bold;
-            margin: 8px 0;
-        }
-
         /* Modal mejorado */
         .modal {
             position: fixed;
@@ -486,8 +478,7 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <button class="menu-button" onclick="toggleMenu()" id="menuButton">
-        <div></div>
-        <div></div>
+        <div></div><div></div>
         <div></div>
     </button>
 
@@ -520,8 +511,7 @@
                 <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Romántico</div>
-                    <div class="price">$89.900</div>
-                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión.</div>
+                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -530,8 +520,7 @@
                 <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Especial</div>
-                    <div class="price">$99.900</div>
-                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables.</div>
+                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -540,8 +529,7 @@
                 <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Clásico</div>
-                    <div class="price">$79.900</div>
-                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante.</div>
+                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -550,8 +538,7 @@
                 <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Premium</div>
-                    <div class="price">$129.900</div>
-                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación.</div>
+                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -560,8 +547,7 @@
                 <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Deluxe</div>
-                    <div class="price">$149.900</div>
-                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales.</div>
+                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -570,8 +556,7 @@
                 <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Personalizado</div>
-                    <div class="price">$109.900</div>
-                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos.</div>
+                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos. Escribe al WhatsApp para más información.</div>
                     <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
@@ -649,27 +634,22 @@
             });
         }
 
-        // Función de compra
+        // Función de compra actualizada
         function comprarAhora(button, event) {
-            event.stopPropagation(); // Previene que se abra el modal
+            event.stopPropagation();
             const item = button.closest('.gallery-item-info');
             const title = item.querySelector('.gallery-item-title').textContent;
-            const price = item.querySelector('.price').textContent;
             
-            const message = `¡Hola! Me interesa el ${title} por ${price}. ¿Podrían darme más información?`;
-            const whatsappUrl = `https://wa.me/+573174968554?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappUrl, '_blank');
+            const message = `¡Hola! Me interesa el ${title}. ¿Podrían darme más información?`;
+            window.open(`https://wa.me/+573174968554?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         // Funcionalidad de categorías
         document.querySelectorAll('.category').forEach(category => {
             category.addEventListener('click', function() {
-                // Remover clase active de todas las categorías
                 document.querySelectorAll('.category').forEach(c => 
                     c.classList.remove('active'));
                 
-                // Agregar clase active a la categoría seleccionada
                 this.classList.add('active');
                 
                 const selectedCategory = this.textContent.toLowerCase();
