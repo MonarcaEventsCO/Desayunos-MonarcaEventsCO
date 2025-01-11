@@ -6,7 +6,7 @@
     <title>Desayunos Sorpresa - MonarcaEventsCO</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: "Poppins", Arial, sans-serif;
             margin: 0;
@@ -276,267 +276,125 @@
             max-width: 90%;
             max-height: 90%;
             transform: scale(0.8);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .modal.active .modal-content {
             transform: scale(1);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid #FFD700;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 215, 0, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .modal-close::before,
-        .modal-close::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 2px;
-            background: #FFD700;
-        }
-
-        .modal-close::before {
-            transform: rotate(45deg);
-        }
-
-        .modal-close::after {
-            transform: rotate(-45deg);
-        }
-
-        .contact {
-            padding: 6rem 2rem;
-            background: rgba(30, 30, 30, 0.95);
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .contact h2 {
-            color: #FFD700;
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .contact h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
+        .modal img {
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
-        }
-
-        .whatsapp-icon {
-            width: 32px;
-            height: 32px;
-            vertical-align: middle;
-            margin-left: 8px;
-            transition: all 0.3s ease;
-            border-radius: 50%;
-            padding: 5px;
-            background: rgba(255, 215, 0, 0.1);
-        }
-
-        .whatsapp-icon:hover {
-            transform: scale(1.2) rotate(10deg);
-            background: rgba(255, 215, 0, 0.2);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2.2rem;
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
             }
-
-            .menu {
-                width: 250px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .gallery-item img {
-                height: 250px;
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <button class="menu-button" onclick="toggleMenu()" id="menuButton">
+    <!-- Menú y Overlay -->
+    <div class="menu-button" onclick="toggleMenu()">
         <div></div>
         <div></div>
         <div></div>
-    </button>
-
-    <div class="menu" id="menu">
-        <a href="https://monarcaeventsco.github.io/MonarcaEventsCO/">Inicio</a>
-        <a href="#">Desayunos</a>
-        <a href="#">Horarios de Atención</a>
-        <a href="#">Información de Contacto</a>
+    </div>
+    <div class="overlay" onclick="closeMenu()"></div>
+    <div class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Galería</a>
+        <a href="#">Contacto</a>
     </div>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h2>
-            Bienvenido a <span class="highlight">MonarcaEventsCO</span> donde hacemos tus sueños realidad
-        </h2>
-        <p>Transformamos tus momentos en recuerdos inolvidables. Explora nuestra galería de desayunos sorpresa.</p>
+        <h2><span class="highlight">Desayunos</span> Sorpresa para Ti</h2>
+        <p>¡Haz que tu día comience con una deliciosa sorpresa!</p>
     </section>
 
+    <!-- Galería -->
     <section class="gallery">
-        <h2>Desayunos Sorpresa</h2>
+        <h2>Galería de Deliciosos Desayunos</h2>
         <div class="gallery-grid">
             <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
+                <img src="https://via.placeholder.com/300" alt="Desayuno 1">
                 <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Romántico</div>
-                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión.</div>
+                    <h3 class="gallery-item-title">Desayuno Sorpresa 1</h3>
+                    <p class="gallery-item-description">Una deliciosa mezcla de sabores para iniciar el día con energía.</p>
                 </div>
             </div>
             <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
+                <img src="https://via.placeholder.com/300" alt="Desayuno 2">
                 <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Especial</div>
-                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables.</div>
+                    <h3 class="gallery-item-title">Desayuno Sorpresa 2</h3>
+                    <p class="gallery-item-description">Desayuno nutritivo con frutas frescas y jugos naturales.</p>
                 </div>
             </div>
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-
-                    <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Clásico</div>
-                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante.</div>
-                </div>
-            </div>
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Premium</div>
-                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación.</div>
-                </div>
-            </div>
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Deluxe</div>
-                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales.</div>
-                </div>
-            </div>
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Personalizado</div>
-                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos.</div>
-                </div>
-            </div>
+            <!-- Más items de la galería -->
         </div>
     </section>
 
-    <section class="contact">
-        <h2>Contacto</h2>
-        <p>
-            Si deseas más información o tienes alguna consulta, no dudes en contactarnos:<br>
-            <strong>Email:</strong> monarcaeventsco@gmail.com<br>
-            <strong>WhatsApp:</strong> +57 317 4968554
-            <a href="https://wa.me/+573174968554" target="_blank">
-                <img src="https://i.imgur.com/BQeNOAJ.jpeg" alt="WhatsApp" class="whatsapp-icon">
-            </a>
-        </p>
-    </section>
+    <!-- Modal -->
+    <div class="modal" onclick="closeModal()">
+        <div class="modal-content">
+            <img src="https://via.placeholder.com/600" alt="Imagen modal">
+        </div>
+    </div>
 
     <script>
         function toggleMenu() {
-            const menu = document.getElementById('menu');
-            const button = document.getElementById('menuButton');
-            const overlay = document.getElementById('overlay');
-            
+            const menu = document.querySelector('.menu');
+            const overlay = document.querySelector('.overlay');
+            const menuButton = document.querySelector('.menu-button');
             menu.classList.toggle('active');
-            button.classList.toggle('active');
             overlay.classList.toggle('active');
+            menuButton.classList.toggle('active');
         }
 
-        function openModal(item) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            
-            const modalContent = document.createElement('div');
-            modalContent.className = 'modal-content';
-            
-            const img = document.createElement('img');
-            img.src = item.querySelector('img').src;
-            img.style.maxWidth = '90vw';
-            img.style.maxHeight = '90vh';
-            img.style.objectFit = 'contain';
-            
-            const closeButton = document.createElement('button');
-            closeButton.className = 'modal-close';
-            closeButton.onclick = () => {
-                modal.classList.remove('active');
-                setTimeout(() => modal.remove(), 300);
-            };
-            
-            modalContent.appendChild(img);
-            modal.appendChild(modalContent);
-            modal.appendChild(closeButton);
-            document.body.appendChild(modal);
-            
-            // Forzar reflow
-            modal.offsetHeight;
-            modal.classList.add('active');
-            
-            modal.onclick = (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    setTimeout(() => modal.remove(), 300);
-                }
-            };
+        function closeMenu() {
+            const menu = document.querySelector('.menu');
+            const overlay = document.querySelector('.overlay');
+            const menuButton = document.querySelector('.menu-button');
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            menuButton.classList.remove('active');
+        }
 
-            // Prevenir scroll del body cuando el modal está abierto
-            document.body.style.overflow = 'hidden';
-            modal.addEventListener('click', () => {
-                document.body.style.overflow = '';
-            });
+        function openModal(element) {
+            const modal = document.querySelector('.modal');
+            const imgSrc = element.querySelector('img').src;
+            const modalImg = modal.querySelector('img');
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.classList.remove('active');
         }
     </script>
+
 </body>
 </html>
