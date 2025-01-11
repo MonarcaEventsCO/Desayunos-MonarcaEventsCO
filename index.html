@@ -16,6 +16,7 @@
             overflow-x: hidden;
         }
 
+        /* Estilos originales del menú */
         .menu-button {
             position: fixed;
             top: 20px;
@@ -120,6 +121,7 @@
             visibility: visible;
         }
 
+        /* Estilos originales del hero */
         .hero {
             text-align: center;
             padding: 6rem 1rem;
@@ -156,6 +158,43 @@
             transform: scaleX(1);
         }
 
+        /* Nuevas categorías */
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #FFD700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category.active {
+            background: #FFD700;
+            color: #121212;
+        }
+
+        .category:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Estilos originales de la galería con mejoras */
         .gallery {
             padding: 6rem 2rem;
             max-width: 1200px;
@@ -219,6 +258,7 @@
             transform: scale(1.05);
         }
 
+        /* Información de producto mejorada */
         .gallery-item-info {
             position: absolute;
             bottom: 0;
@@ -249,6 +289,36 @@
             line-height: 1.4;
         }
 
+        /* Nuevo botón de compra */
+        .buy-button {
+            display: inline-block;
+            background: #FFD700;
+            color: #121212;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .buy-button:hover {
+            background: #ffd900;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Precio añadido */
+        .price {
+            font-size: 1.2rem;
+            color: #FFD700;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        /* Modal mejorado */
         .modal {
             position: fixed;
             top: 0;
@@ -277,6 +347,10 @@
             max-height: 90%;
             transform: scale(0.8);
             transition: all 0.3s ease;
+            background: #1E1E1E;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .modal.active .modal-content {
@@ -321,6 +395,7 @@
             transform: rotate(-45deg);
         }
 
+        /* Contacto y WhatsApp */
         .contact {
             padding: 6rem 2rem;
             background: rgba(30, 30, 30, 0.95);
@@ -365,6 +440,7 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
+        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -380,6 +456,7 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* Media Queries */
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2.2rem;
@@ -396,6 +473,11 @@
 
             .gallery-item img {
                 height: 250px;
+            }
+
+            .category {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -423,6 +505,14 @@
         <p>Transformamos tus momentos en recuerdos inolvidables. Explora nuestra galería de desayunos sorpresa.</p>
     </section>
 
+    <div class="categories">
+        <div class="category active">Todos</div>
+        <div class="category">Románticos</div>
+        <div class="category">Especiales</div>
+        <div class="category">Premium</div>
+        <div class="category">Personalizados</div>
+    </div>
+
     <section class="gallery">
         <h2>Desayunos Sorpresa</h2>
         <div class="gallery-grid">
@@ -430,43 +520,59 @@
                 <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Romántico</div>
+                    <div class="price">$89.900</div>
                     <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
+            
             <div class="gallery-item" onclick="openModal(this)">
                 <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Especial</div>
+                    <div class="price">$99.900</div>
                     <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
+            
             <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-
-                    <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
+                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Clásico</div>
+                    <div class="price">$79.900</div>
                     <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
+            
             <div class="gallery-item" onclick="openModal(this)">
                 <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Premium</div>
+                    <div class="price">$129.900</div>
                     <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
+            
             <div class="gallery-item" onclick="openModal(this)">
                 <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Deluxe</div>
+                    <div class="price">$149.900</div>
                     <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
+            
             <div class="gallery-item" onclick="openModal(this)">
                 <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Personalizado</div>
+                    <div class="price">$109.900</div>
                     <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
                 </div>
             </div>
         </div>
@@ -485,6 +591,7 @@
     </section>
 
     <script>
+        // Función del menú
         function toggleMenu() {
             const menu = document.getElementById('menu');
             const button = document.getElementById('menuButton');
@@ -495,6 +602,7 @@
             overlay.classList.toggle('active');
         }
 
+        // Función del modal mejorada
         function openModal(item) {
             const modal = document.createElement('div');
             modal.className = 'modal';
@@ -504,25 +612,22 @@
             
             const img = document.createElement('img');
             img.src = item.querySelector('img').src;
-            img.style.maxWidth = '90vw';
-            img.style.maxHeight = '90vh';
-            img.style.objectFit = 'contain';
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '10px';
+            
+            const info = item.querySelector('.gallery-item-info').cloneNode(true);
+            
+            modalContent.appendChild(img);
+            modalContent.appendChild(info);
+            modal.appendChild(modalContent);
             
             const closeButton = document.createElement('button');
             closeButton.className = 'modal-close';
-            closeButton.onclick = () => {
-                modal.classList.remove('active');
-                setTimeout(() => modal.remove(), 300);
-            };
+            modalContent.appendChild(closeButton);
             
-            modalContent.appendChild(img);
-            modal.appendChild(modalContent);
-            modal.appendChild(closeButton);
             document.body.appendChild(modal);
             
-            // Forzar reflow
-            modal.offsetHeight;
-            modal.classList.add('active');
+            setTimeout(() => modal.classList.add('active'), 10);
             
             modal.onclick = (e) => {
                 if (e.target === modal) {
@@ -531,10 +636,74 @@
                 }
             };
 
-            // Prevenir scroll del body cuando el modal está abierto
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                modal.classList.remove('active');
+                setTimeout(() => modal.remove(), 300);
+            };
+
             document.body.style.overflow = 'hidden';
+            
             modal.addEventListener('click', () => {
                 document.body.style.overflow = '';
+            });
+        }
+
+        // Función de compra
+        function comprarAhora(button, event) {
+            event.stopPropagation(); // Previene que se abra el modal
+            const item = button.closest('.gallery-item-info');
+            const title = item.querySelector('.gallery-item-title').textContent;
+            const price = item.querySelector('.price').textContent;
+            
+            const message = `¡Hola! Me interesa el ${title} por ${price}. ¿Podrían darme más información?`;
+            const whatsappUrl = `https://wa.me/+573174968554?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Funcionalidad de categorías
+        document.querySelectorAll('.category').forEach(category => {
+            category.addEventListener('click', function() {
+                // Remover clase active de todas las categorías
+                document.querySelectorAll('.category').forEach(c => 
+                    c.classList.remove('active'));
+                
+                // Agregar clase active a la categoría seleccionada
+                this.classList.add('active');
+                
+                const selectedCategory = this.textContent.toLowerCase();
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    const title = item.querySelector('.gallery-item-title')
+                        .textContent.toLowerCase();
+                    
+                    if (selectedCategory === 'todos') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = title.includes(selectedCategory.slice(0, -1)) 
+                            ? 'block' 
+                            : 'none';
+                    }
+                });
+            });
+        });
+
+        // Lazy loading para imágenes
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
             });
         }
     </script>
