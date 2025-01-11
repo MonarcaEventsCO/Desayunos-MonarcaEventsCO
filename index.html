@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desayunos Sorpresa - MonarcaEventsCO</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
             font-family: "Poppins", Arial, sans-serif;
             margin: 0;
@@ -16,10 +18,11 @@
 
         .menu-button {
             position: fixed;
-            top: 10px;
-            left: 10px;
-            background: none;
-            border: none;
+            top: 20px;
+            left: 20px;
+            background: rgba(30, 30, 30, 0.9);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
             cursor: pointer;
             z-index: 1001;
             display: flex;
@@ -28,39 +31,74 @@
             align-items: center;
             width: 50px;
             height: 50px;
-            transition: left 0.3s ease;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         .menu-button div {
-            width: 35px;
-            height: 4px;
+            width: 28px;
+            height: 3px;
             background-color: #FFD700;
-            margin: 5px 0;
-            transition: opacity 0.3s;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
         }
 
-        .menu-button.active div {
+        .menu-button.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-button.active div:nth-child(2) {
             opacity: 0;
+        }
+
+        .menu-button.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .menu {
             position: fixed;
             top: 0;
             left: -100%;
-            width: 250px;
+            width: 280px;
             height: 100%;
-            background-color: #1E1E1E;
+            background: rgba(30, 30, 30, 0.95);
             color: #f1f1f1;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
             transition: left 0.3s ease;
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 80px 30px 30px;
+            backdrop-filter: blur(10px);
         }
 
         .menu.active {
             left: 0;
+        }
+
+        .menu a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid transparent;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+            transform: translateX(10px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
 
         .overlay {
@@ -69,34 +107,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
             z-index: 999;
+            backdrop-filter: blur(3px);
         }
 
         .overlay.active {
-            display: block;
-        }
-
-        .menu-button.active {
-            left: 260px;
-        }
-
-        .menu a {
-            color: #FFD700;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin: 10px 0;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #fff;
+            opacity: 1;
+            visibility: visible;
         }
 
         .hero {
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 6rem 1rem;
             background-color: #1E1E1E;
             color: white;
             font-size: 1.2rem;
@@ -104,29 +130,35 @@
             position: relative;
             overflow: hidden;
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: slideInRight 1.5s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .highlight {
             color: #FFD700;
-            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #FFD700;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover::after {
+            transform: scaleX(1);
         }
 
         .gallery {
-            padding: 4rem 2rem;
-            max-width: 1100px;
+            padding: 6rem 2rem;
+            max-width: 1200px;
             margin: auto;
             animation: fadeInUp 1s ease;
         }
@@ -135,38 +167,164 @@
             color: #FFD700;
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .gallery h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
             justify-items: center;
+            padding: 1rem;
         }
 
-        .gallery-grid img {
+        .gallery-item {
+            position: relative;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            background: #1E1E1E;
+            border: 2px solid rgba(255, 215, 0, 0.1);
         }
 
-        .gallery-grid img:hover {
-            transform: scale(1.05);
+        .gallery-item:hover {
+            transform: translateY(-10px);
             border-color: #FFD700;
-            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 1.2rem;
+            transform: translateY(100%);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .gallery-item:hover .gallery-item-info {
+            transform: translateY(0);
+        }
+
+        .gallery-item-title {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .gallery-item-description {
+            color: #f1f1f1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-close::before,
+        .modal-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #FFD700;
+        }
+
+        .modal-close::before {
+            transform: rotate(45deg);
+        }
+
+        .modal-close::after {
+            transform: rotate(-45deg);
         }
 
         .contact {
-            padding: 4rem 2rem;
-            max-width: 1100px;
-            margin: auto;
-            animation: fadeInUp 1s ease;
+            padding: 6rem 2rem;
+            background: rgba(30, 30, 30, 0.95);
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .contact h2 {
@@ -174,38 +332,70 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .contact p {
-            color: white;
-            font-size: 1.2rem;
-            text-align: center;
-            line-height: 1.8;
-        }
-
-        .contact strong {
-            color: #FFD700;
+        .contact h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
         }
 
         .whatsapp-icon {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             vertical-align: middle;
             margin-left: 8px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            padding: 5px;
+            background: rgba(255, 215, 0, 0.1);
         }
 
         .whatsapp-icon:hover {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(10deg);
+            background: rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         @media (max-width: 768px) {
             .hero h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            .menu {
+                width: 250px;
             }
 
             .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .gallery-item img {
+                height: 250px;
             }
         }
     </style>
@@ -230,18 +420,55 @@
         <h2>
             Bienvenido a <span class="highlight">MonarcaEventsCO</span> donde hacemos tus sueños realidad
         </h2>
-        <p>Transformamos tus momentos en recuerdos inolvidables. Da click para ver y ampliar nuestros desayunos sorpresa.</p>
+        <p>Transformamos tus momentos en recuerdos inolvidables. Explora nuestra galería de desayunos sorpresa.</p>
     </section>
 
     <section class="gallery">
         <h2>Desayunos Sorpresa</h2>
         <div class="gallery-grid">
-            <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno 1" onclick="openModal(this)">
-            <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno 2" onclick="openModal(this)">
-            <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno 3" onclick="openModal(this)">
-            <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno 4" onclick="openModal(this)">
-            <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno 5" onclick="openModal(this)">
-            <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno 6" onclick="openModal(this)">
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Romántico</div>
+                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión.</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Especial</div>
+                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables.</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-
+                    <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Clásico</div>
+                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante.</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Premium</div>
+                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación.</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Deluxe</div>
+                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales.</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Personalizado</div>
+                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos.</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -268,28 +495,47 @@
             overlay.classList.toggle('active');
         }
 
-        function openModal(img) {
+        function openModal(item) {
             const modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.cursor = 'pointer';
-            modal.style.zIndex = '1001';
-            modal.onclick = () => modal.remove();
-
-            const modalImg = document.createElement('img');
-            modalImg.src = img.src;
-            modalImg.style.maxWidth = '90%';
-            modalImg.style.maxHeight = '90%';
-            modal.appendChild(modalImg);
-
+            modal.className = 'modal';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            
+            const img = document.createElement('img');
+            img.src = item.querySelector('img').src;
+            img.style.maxWidth = '90vw';
+            img.style.maxHeight = '90vh';
+            img.style.objectFit = 'contain';
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'modal-close';
+            closeButton.onclick = () => {
+                modal.classList.remove('active');
+                setTimeout(() => modal.remove(), 300);
+            };
+            
+            modalContent.appendChild(img);
+            modal.appendChild(modalContent);
+            modal.appendChild(closeButton);
             document.body.appendChild(modal);
+            
+            // Forzar reflow
+            modal.offsetHeight;
+            modal.classList.add('active');
+            
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                }
+            };
+
+            // Prevenir scroll del body cuando el modal está abierto
+            document.body.style.overflow = 'hidden';
+            modal.addEventListener('click', () => {
+                document.body.style.overflow = '';
+            });
         }
     </script>
 </body>
