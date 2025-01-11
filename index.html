@@ -193,7 +193,6 @@
         .gallery-item {
             position: relative;
             width: 100%;
-            max-width: 400px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -393,62 +392,10 @@
             .gallery-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1.5rem;
-                padding: 0.5rem;
-            }
-
-            .gallery-item {
-                max-width: 300px;
             }
 
             .gallery-item img {
-                height: 200px;
-            }
-
-            .gallery-item-info {
-                padding: 0.8rem;
-            }
-
-            .gallery-item-title {
-                font-size: 1rem;
-            }
-
-            .gallery-item-description {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-            }
-
-            .gallery-item {
-                max-width: 250px;
-            }
-
-            .gallery-item img {
-                height: 180px;
-            }
-
-            .hero {
-                padding: 4rem 1rem;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .gallery h2 {
-                font-size: 2rem;
-            }
-
-            .contact {
-                padding: 4rem 1rem;
-            }
-
-            .contact h2 {
-                font-size: 2rem;
+                height: 250px;
             }
         }
     </style>
@@ -482,7 +429,7 @@
             <div class="gallery-item" onclick="openModal(this)">
                 <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
                 <div class="gallery-item-info">
-                    <div class="gallery-item-title">Des<div class="gallery-item-title">Desayuno Romántico</div>
+                    <div class="gallery-item-title">Desayuno Romántico</div>
                     <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión.</div>
                 </div>
             </div>
@@ -494,7 +441,8 @@
                 </div>
             </div>
             <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
+                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-
+                    <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
                 <div class="gallery-item-info">
                     <div class="gallery-item-title">Desayuno Clásico</div>
                     <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante.</div>
